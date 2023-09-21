@@ -331,3 +331,26 @@ Contents:
 1. Application Binary interface (ABI)
 2. Lab work using ABI function calls
 3. Basic verification flow using iverilog
+
+## Day 3 - Digital Logic with TL-Verilog and Makerchip (22/09/2023)
+
+Contents:
+1. Combinational logic in TL-Verilog using Makerchip
+2. Sequential and pipelined logic
+3. Validity
+4. Hierarchy
+
+## Day 4 - Basic RISC-V CPU micro-architecture (23/09/2023)
+
+Contents:
+1. Microarchitecture and testbench for a simple RISC-V CPU
+2. Fetch, decode, and execute logic
+3. RISC-V control logic
+
+## Day 5 - Complete Pipelined RISC-V CPU micro-architecture/store (24/09/2023)
+
+Contents:
+1. Pipelining the CPU
+2. Load and store instructions and memory
+3. Completing the RISC-V CPU
+4. Wrap-up and future opportunities
