@@ -465,10 +465,14 @@ Running the *1to9_custom.c* on *picorv32.v* microprocessor verilog code by passi
 Commands to compile & execute the same C program on *picorv32.v* microprocessor code:
 
 ```bash
+# List all files
+ls
 # Change permission of all files in current folder to 755
 chmod 755 rv32im.sh
 # Execute the bash script
-source rv32im.sh
+./rv32im.sh
+# List all files
+ls
 ```
 
 **Screenshot**
