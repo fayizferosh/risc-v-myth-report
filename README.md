@@ -266,9 +266,9 @@ int main()
     unsigned long long int min = (unsigned long long int)(0);
     unsigned long long int minover = (unsigned long long int)(pow(2,64)*-1);
     printf("Highest number represented by unsigned long long int is %llu which is calculated by (2^64 - 1)\n", max);
-    printf("Proving by overflowing above limit (2^127) value of variable still is %llu", maxover);
+    printf("Proving by overflowing above limit (2^127) value of variable still is %llu\n", maxover);
     printf("Lowest number represented by unsigned long long int is %llu\n", min);
-    printf("Proving by overflowing below limit (2^64 * -1) value of variable still is %llu", minover);
+    printf("Proving by overflowing below limit (2^64 * -1) value of variable still is %llu\n", minover);
     return 0;
 }
 ```
@@ -281,6 +281,10 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o unshighlow_Ofast.o uns
 # Executing the code
 spike pk unshighlow_Ofast.o
 ```
+
+**Screenshot**
+
+![Screenshot from 2023-09-21 17-33-21](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/d58cbe25-231e-4abb-8b6a-a664dec8f20c)
 
 C Program *signhighlow.c*:
 
@@ -295,9 +299,9 @@ int main()
     long long int min = (long long int)(pow(2,63)*-1);
     long long int minover = (long long int)(pow(2,127)*-1);
     printf("Highest positive number represented by signed long long int is %lld which is calculated by (2^63 - 1)\n", max);
-    printf("Proving by overflowing above limit (2^127) value of variable still is %lld", maxover);
+    printf("Proving by overflowing above limit (2^127) value of variable still is %lld\n", maxover);
     printf("Lowest negative number represented by signed long long int is %lld which is calculated by (2^63 * -1)\n", min);
-    printf("Proving by overflowing below limit (2^127 * -1) value of variable still is %lld", minover);
+    printf("Proving by overflowing below limit (2^127 * -1) value of variable still is %lld\n", minover);
     return 0;
 }
 ```
@@ -310,3 +314,7 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o signhighlow_Ofast.o si
 # Executing the code
 spike pk signhighlow_Ofast.o
 ```
+
+**Screenshot**
+
+![Screenshot from 2023-09-21 17-37-11](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/161e5477-2cc5-4413-b786-ef5fe13b7b06)
