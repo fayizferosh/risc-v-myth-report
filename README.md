@@ -51,7 +51,7 @@ Contents:
 3. Integer number representation
 4. Signed and unsigned arithmetic operations
 
-## Part 1a - RISC-V ISA
+### RISC-V ISA
 
 The following are basic C program which will do integer addition, multiplication and division.
 
@@ -331,6 +331,84 @@ Contents:
 1. Application Binary interface (ABI)
 2. Lab work using ABI function calls
 3. Basic verification flow using iverilog
+
+### Application Binary Interface (ABI)
+
+There are some portions of the ISA that is directly accessible to the user namely a programmer and operating system through a *System Call* using which a user can access and utilize these portions of the ISA namely the registers thereby getting direct access to the hardware of the system. And the *System Call* is performed through or using the *Application Binary Interface (ABI)* also called as *System Call Interface*. The portion of the ISA available to user is called the *User ISA* and the portion available to both system and user is called the *User and System ISA*.
+
+![Screenshot (310)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/aa9edd28-d0b3-4c23-b417-bab3e0d04e18)
+![Screenshot (323)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/85d5e481-4a83-4c95-83fe-fab54c5f4e61)
+![Screenshot (324)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/f665d290-390c-40e8-8dd9-0ea9ef0c4631)
+
+There are only 32 registers in both riscv64 and riscv32 architecture and each register in riscv64 is 64 bit but memory each unit stores only a byte (8 bits) so 8 units of memory is required to store the data in a riscv64 register and it is done by splitting the data into 8 bytes which is stored in such a way that the *Least Significant Byte* is stored in the lowest address memory and moving up with each byte. This system where LSB is stored in lowest address memory is called *little-endian* memory addressing system.
+
+![Screenshot (311)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/a4237954-27b1-47c9-87ad-9e283d97e16c)
+![Screenshot (312)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/2c4f62cd-f4c9-4d2f-982b-114fdaa050fb)
+
+All the instruction sizes in both riscv64 and riscv32 architecture are 32 bit only. Of which 5 bit is the maximum length for indicating and register and using the formula [0 - (2^5 - 1)], 0 to 31 are the register numbers that can be represented which is why there are only 32 registers in both riscv64 and riscv32.
+
+![Screenshot (322)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/6ca2d728-6834-45fe-8232-cb64f3182194)
+
+### Some RISC-V ISA instructions
+
+#### ld (load doubleword)
+
+This instruction is used to load data into register from memory. In it's 32bits, opcode or the assembly language instruction or command which in this case is *ld* is recognized by the using 10 bits of which 3 are of *funct3* and the rest 7 are of *opcode*.
+
+![Screenshot (314)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/fdf26322-03a0-4487-b833-678bba55be49)
+![Screenshot (315)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/6319d8ad-5b2d-4312-8c70-52be12da2789)
+
+#### add (addition)
+
+This instruction is used to add contents of 2 registers and store the output in another register. In it's 32bits, opcode or the assembly language instruction or command which in this case is *add* is recognized by the using 17 bits of which 3 are of *funct3*, 7 are of *funct7* and the rest 7 are of *opcode*.
+
+![Screenshot (316)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/7f589bc4-da75-4686-9d2b-2b70c5fe702c)
+
+#### sd (store doubleword)
+
+This instruction is used to store data from register into memory. In it's 32bits, opcode or the assembly language instruction or command which in this case is *sd* is recognized by the using 10 bits of which 3 are of *funct3* and the rest 7 are of *opcode*.
+
+![Screenshot (317)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/d55d1f29-6b2b-4902-b4f1-419714705ac6)
+
+#### addi (addition immediate)
+
+This instruction is used to add contents of a register to an immediate or constant value and store the output in a register. The basic syntax is `addi rd, rs1, imm` where *rd* is the destination register, *rs1* is the source register and *imm* is the immediate or constant value.
+
+#### blt (branch if less than)
+
+This instruction is used to compare two registers and if source register content is less than destination register content then branch the code to the address pointed by the label. The basic syntax is `blt rd, rs1, label` where *rd* is the destination register, *rs1* is the source register and *label* is the user-defined label that points to a specific address of a line of code.
+
+#### lui (load upper immediate)
+
+This instruction is used to load an immediate or constant value to the *upper-immediate* (bits 12 to 31) of a register. The basic syntax is `lui rd, imm` where *rd* is the destination register and *imm* is the immediate or constant value.
+
+#### ret (return)
+
+This instruction is used to return back the parent program along with returning a value of register.
+
+### Classifications other than Base Integer Instructions (RV64I)
+
+#### R-type Instructions
+
+Instructions that operate only on registers are called *R-type* instructions.
+
+![Screenshot (318)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/b5ec7563-2072-4fee-a915-a092d1ab64a5)
+
+#### I-type Instructions
+
+Instructions that operate on registers and an immediate are called *I-type* instructions.
+
+![Screenshot (319)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/4b6461ff-a320-4c32-993f-17107ddbcc0f)
+
+#### S-type Instructions
+
+Instructions that operate only on source registers and an immediate and are generally used for storing something are called *S-type* instructions.
+
+![Screenshot (320)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/53c89492-e3de-4788-97a1-c54b4e9b02ab)
+
+### Lab 3
+
+
 
 ## Day 3 - Digital Logic with TL-Verilog and Makerchip (22/09/2023)
 
