@@ -45,6 +45,12 @@ There are mainly 3 different parts in this course. They are:
 
 ## Day 1 - Introduction to RISC-V ISA and GNU compiler toolchain (20/09/2023)
 
+Contents:
+1. Introduction to RISC-V basic keywords
+2. Labwork for RISC-V software toolchain
+3. Integer number representation
+4. Signed and unsigned arithmetic operations
+
 ## Part 1a - RISC-V ISA
 
 The following are basic C program which will do integer addition, multiplication and division.
@@ -318,3 +324,10 @@ spike pk signhighlow_Ofast.o
 **Screenshot**
 
 ![Screenshot from 2023-09-21 17-37-11](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/161e5477-2cc5-4413-b786-ef5fe13b7b06)
+
+## Day 2 - Introduction to ABI and basic verification flow (21/09/2023)
+
+Contents:
+1. Application Binary interface (ABI)
+2. Lab work using ABI function calls
+3. Basic verification flow using iverilog
