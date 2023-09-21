@@ -45,7 +45,7 @@ There are mainly 3 different parts in this course. They are:
 
 ## Day 1 - Introduction to RISC-V ISA and GNU compiler toolchain (20/09/2023)
 
-### Part 1a - RISC-V ISA
+## Part 1a - RISC-V ISA
 
 The following are basic C program which will do integer addition, multiplication and division.
 
@@ -81,7 +81,202 @@ In the following highlighted instructions there are some data transfer happening
 
 ![Screenshot (293)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/bc831159-437b-47c3-8725-738136f6cfd3)
 
-### Illustration of the RISC-V gnu toolchain
+### Lab 1
 
-#### Lab 1
+C Program *sum1ton.c*:
 
+```C
+#include<stdio.h>
+int main()
+{
+    int i,sum=0,n=9;
+    for(i=1;i<=n;i++)
+    {
+        sum+=i;
+    }
+    printf("The sum of numbers from 1 to %d is %d\n", n, sum);
+    return 0;
+}
+```
+
+Commands to compile & execute and generate output of C program:
+
+```bash
+# Compiling the code
+gcc sum1ton.c
+# Executing the code
+./a.out
+```
+
+Commands to compile & execute the same C program using RISC-V simulator:
+
+Details regarding optimization options -O1 & -Ofast can be found [here](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html).
+
+Details regarding rest of the options -mabi, -march and so on can be found [here](https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html).
+
+```bash
+# Compiling code on RISC-V simulator in -O1 optimization
+riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
+# Disassembling compiled code
+riscv64-unknown-elf-objdump -d sum1ton_O1.o > sum1ton_O1_d.txt
+# Compiling code on RISC-V simulator in -Ofast optimization
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton_Ofast.o sum1ton.c
+# Disassembling compiled code
+riscv64-unknown-elf-objdump -d sum1ton_Ofast.o > sum1ton_Ofast_d.txt
+```
+```bash
+# Executing the code
+spike pk sum1ton_O1.o
+# To debug type
+spike -d pk sum1ton_O1.o
+```
+```bash
+# In debug mode
+# Run until program counter "100b0"
+: until pc 0 100b0
+# Display value of register "a2"
+: reg 0 a2
+# Just press "Enter" to run the next instruction
+:
+# Checking register "a2" value again
+: reg 0 a2
+# Display value of register "a0"
+: reg 0 a0
+# Just press "Enter" to run the next instruction
+:
+# Checking register "a0" value again
+: reg 0 a0
+# Display value of stack pointer "sp"
+: reg 0 sp
+# Just press "Enter" to run the next instruction
+:
+# Checking stack pointer "sp" value again
+: reg 0 sp
+# Exiting debug mode
+: q
+```
+```bash
+# Executing the code
+spike pk sum1ton_Ofast.o
+# To debug type
+spike -d pk sum1ton_Ofast.o
+```
+```bash
+# In debug mode
+# Run until program counter "100b0"
+: until pc 0 100b0
+# Display value of register "a2"
+: reg 0 a2
+# Just press "Enter" to run the next instruction
+:
+# Checking register "a2" value again
+: reg 0 a2
+# Display value of register "a0"
+: reg 0 a0
+# Just press "Enter" to run the next instruction
+:
+# Checking register "a0" value again
+: reg 0 a0
+# Display value of stack pointer "sp"
+: reg 0 sp
+# Just press "Enter" to run the next instruction
+:
+# Checking stack pointer "sp" value again
+: reg 0 sp
+# Exiting debug mode
+: q
+```
+
+***lui* command**
+
+![Screenshot (294)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/1c4648d0-1583-4e24-ab0d-c78a17400c5f)
+
+***addi* command**
+
+![Screenshot (296)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/2fce31ac-2214-42c3-a97f-2cb43127302b)
+
+**Important Terms**
+
+![Screenshot (297)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/bff11b16-04a5-4326-9d38-d89dcb6f8447)
+
+**Maximum amount of numbers that can be expressed in 64bit**
+
+![Screenshot (299)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/60cdd2dd-5f3d-4ae0-96e6-37df0c2546fb)
+
+**Unsigned 64bit limits**
+
+![Screenshot (300)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/46e95ff8-57e2-43e5-bc5a-eefc637366e9)
+
+**Signed postive representation and signed negative in two's compliment representation**
+
+![Screenshot (301)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/04b6f7d6-ea3e-4fe3-86b3-f4bf56683e0b)
+![Screenshot (302)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/496d4bef-014e-4c35-9778-fe7177636a26)
+![Screenshot (303)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/4fba20b7-1195-4876-83fb-dc761b077ed3)
+![Screenshot (304)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/9e6bd23a-2f93-493f-a733-b1c5af359dda)
+![Screenshot (305)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/d051d15d-3843-4b23-88e6-5ad7a15755d6)
+![Screenshot (306)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/4786b124-d725-4856-a6af-51b1969d12c1)
+
+**Signed 64bit limits**
+
+![Screenshot (308)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/1b1050d0-2e92-45b8-b3a9-291d1ab1b63d)
+![Screenshot (309)](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/054d1483-9558-428a-9ec1-8864f27d18af)
+
+### Lab 2
+
+C Program *unshighlow.c*:
+
+```C
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+    unsigned long long int max = (unsigned long long int)(pow(2,64)-1); 
+    unsigned long long int maxover = (unsigned long long int)(pow(2,127));
+    unsigned long long int min = (unsigned long long int)(0);
+    unsigned long long int minover = (unsigned long long int)(pow(2,64)*-1);
+    printf("Highest number represented by unsigned long long int is %llu which is calculated by (2^64 - 1)\n", max);
+    printf("Proving by overflowing above limit (2^127) value of variable still is %llu", maxover);
+    printf("Lowest number represented by unsigned long long int is %llu\n", min);
+    printf("Proving by overflowing below limit (2^64 * -1) value of variable still is %llu", minover);
+    return 0;
+}
+```
+
+Commands to compile & execute the same C program using RISC-V simulator:
+
+```bash
+# Compiling code on RISC-V simulator in -Ofast optimization
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o unshighlow_Ofast.o unshighlow.c
+# Executing the code
+spike pk unshighlow_Ofast.o
+```
+
+C Program *signhighlow.c*:
+
+```C
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+    long long int max = (long long int)(pow(2,63)-1); 
+    long long int maxover = (long long int)(pow(2,127));
+    long long int min = (long long int)(pow(2,63)*-1);
+    long long int minover = (long long int)(pow(2,127)*-1);
+    printf("Highest positive number represented by signed long long int is %lld which is calculated by (2^63 - 1)\n", max);
+    printf("Proving by overflowing above limit (2^127) value of variable still is %lld", maxover);
+    printf("Lowest negative number represented by signed long long int is %lld which is calculated by (2^63 * -1)\n", min);
+    printf("Proving by overflowing below limit (2^127 * -1) value of variable still is %lld", minover);
+    return 0;
+}
+```
+
+Commands to compile & execute the same C program using RISC-V simulator:
+
+```bash
+# Compiling code on RISC-V simulator in -Ofast optimization
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o signhighlow_Ofast.o signhighlow.c
+# Executing the code
+spike pk signhighlow_Ofast.o
+```
