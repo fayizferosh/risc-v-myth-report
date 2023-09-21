@@ -473,6 +473,8 @@ source rv32im.sh
 
 **Screenshot**
 
+![Screenshot from 2023-09-22 00-46-34](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/bf502eb4-3b2b-42b1-9297-a3fe73645f35)
+
 ## Day 3 - Digital Logic with TL-Verilog and Makerchip (22/09/2023)
 
 Contents:
