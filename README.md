@@ -108,6 +108,10 @@ gcc sum1ton.c
 ./a.out
 ```
 
+**Screenshot**
+
+![Screenshot from 2023-09-21 15-47-09](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/28bf2d71-ea12-4e66-9c35-2599045cd8f8)
+
 Commands to compile & execute the same C program using RISC-V simulator:
 
 Details regarding optimization options -O1 & -Ofast can be found [here](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html).
@@ -124,6 +128,17 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton_Ofast.o sum1to
 # Disassembling compiled code
 riscv64-unknown-elf-objdump -d sum1ton_Ofast.o > sum1ton_Ofast_d.txt
 ```
+
+**Screenshots**
+
+![Screenshot from 2023-09-21 15-53-36](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/6e0951cd-37aa-40d5-b842-a96e31cca153)
+
+**-O1 and -Ofast optimizations instruction count in main() function**
+
+![Screenshot from 2023-09-21 15-59-04](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/8e98c586-6ad6-453c-80fb-f5aca9f7e07b)
+![Screenshot from 2023-09-21 16-01-49](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/434f32c8-5300-4e1d-9699-d65ae9c6d588)
+
+
 ```bash
 # Executing the code
 spike pk sum1ton_O1.o
@@ -132,29 +147,36 @@ spike -d pk sum1ton_O1.o
 ```
 ```bash
 # In debug mode
-# Run until program counter "100b0"
-: until pc 0 100b0
-# Display value of register "a2"
-: reg 0 a2
-# Just press "Enter" to run the next instruction
-:
-# Checking register "a2" value again
-: reg 0 a2
-# Display value of register "a0"
-: reg 0 a0
-# Just press "Enter" to run the next instruction
-:
-# Checking register "a0" value again
-: reg 0 a0
+# Run until program counter "10184"
+(spike) until pc 0 10184
 # Display value of stack pointer "sp"
-: reg 0 sp
+(spike) reg 0 sp
 # Just press "Enter" to run the next instruction
-:
+(spike)
 # Checking stack pointer "sp" value again
-: reg 0 sp
+(spike) reg 0 sp
+# Just press "Enter" to run the next instruction
+(spike)
+(spike)
+(spike)
+# Display value of register "a0"
+(spike) reg 0 a0
+# Just press "Enter" to run the next instruction
+(spike)
+# Checking register "a0" value again
+(spike) reg 0 a0
+# Just press "Enter" to run the next instruction
+(spike)
+# Checking register "a0" value again
+(spike) reg 0 a0
 # Exiting debug mode
-: q
+(spike) q
 ```
+
+**Screenshot**
+
+![Screenshot from 2023-09-21 17-05-55](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/56001275-49b5-4b08-8a69-8d019a10c739)
+
 ```bash
 # Executing the code
 spike pk sum1ton_Ofast.o
@@ -164,28 +186,36 @@ spike -d pk sum1ton_Ofast.o
 ```bash
 # In debug mode
 # Run until program counter "100b0"
-: until pc 0 100b0
-# Display value of register "a2"
-: reg 0 a2
-# Just press "Enter" to run the next instruction
-:
-# Checking register "a2" value again
-: reg 0 a2
+(spike) until pc 0 100b0
 # Display value of register "a0"
-: reg 0 a0
+(spike) reg 0 a0
 # Just press "Enter" to run the next instruction
-:
+(spike)
 # Checking register "a0" value again
-: reg 0 a0
+(spike) reg 0 a0
 # Display value of stack pointer "sp"
-: reg 0 sp
+(spike) reg 0 sp
 # Just press "Enter" to run the next instruction
-:
+(spike)
 # Checking stack pointer "sp" value again
-: reg 0 sp
+(spike) reg 0 sp
+# Just press "Enter" to run the next instruction
+(spike)
+(spike)
+# Display value of register "a0"
+(spike) reg 0 a0
+# Just press "Enter" to run the next instruction
+(spike)
+# Checking register "a0" value again
+(spike) reg 0 a0
 # Exiting debug mode
-: q
+(spike) q
 ```
+
+**Screenshot**
+
+![Screenshot from 2023-09-21 17-19-41](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/ff6374e0-6d4e-4db5-a2d2-4d44d6c5235e)
+
 
 ***lui* command**
 
