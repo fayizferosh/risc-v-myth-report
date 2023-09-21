@@ -408,7 +408,70 @@ Instructions that operate only on source registers and an immediate and are gene
 
 ### Lab 3
 
+C Program *1to9_custom.c*:
 
+```C
+#include <stdio.h>
+
+extern int load(int x, int y); 
+
+int main()
+{
+	int result = 0;
+       	int count = 2;
+    	result = load(0x0, count+1);
+    	printf("Sum of number from 1 to %d is %d\n", count, result); 
+}
+
+```
+
+ASM Program *load.S*:
+
+```asm
+.section .text
+.global load
+.type load, @function
+
+load:
+	add 	a4, a0, zero //Initialize sum register a4 with 0x0
+	add 	a2, a0, a1   // store count of 10 in register a2. Register a1 is loaded with 0xa (decimal 10) from main program
+	add	a3, a0, zero // initialize intermediate sum register a3 by 0
+loop:	add 	a4, a3, a4   // Incremental addition
+	addi 	a3, a3, 1    // Increment intermediate register by 1	
+	blt 	a3, a2, loop // If a3 is less than a2, branch to label named <loop>
+	add	a0, a4, zero // Store final result to register a0 so that it can be read by main program
+	ret
+```
+
+Commands to compile & execute the same C program using RISC-V simulator:
+
+```bash
+# Compiling code on RISC-V simulator in -Ofast optimization
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o 1to9_custom_Ofast.o 1to9_custom.c load.S
+# Executing the code
+spike pk 1to9_custom_Ofast.o
+# Disassembling compiled code
+riscv64-unknown-elf-objdump -d 1to9_custom_Ofast.o > 1to9_custom_Ofast_d.txt
+```
+
+**Screenshot**
+
+![Screenshot from 2023-09-21 23-48-27](https://github.com/fayizferosh/risc-v-myth-report/assets/63997454/4f7b5396-bb74-46b0-b760-175b2d0026c3)
+
+### Lab 4
+
+Running the *1to9_custom.c* on *picorv32.v* microprocessor verilog code by passing the the C code as .hex file.
+
+Commands to compile & execute the same C program on *picorv32.v* microprocessor code:
+
+```bash
+# Change permission of all files in current folder to 755
+chmod 755 rv32im.sh
+# Execute the bash script
+source rv32im.sh
+```
+
+**Screenshot**
 
 ## Day 3 - Digital Logic with TL-Verilog and Makerchip (22/09/2023)
 
